@@ -1,5 +1,8 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import SetList from "./components/SetList";
+import HomeBar from "./components/HomeBar";
+import LoginPage from "./components/LoginPage";
+import CreateAccountPage from "./components/CreateAccountPage";
 
 const App = () => {
   const castList = [
@@ -23,18 +26,24 @@ const App = () => {
         tikTok: "cty.visuals",
       },
     },
+    {
+      id: 3,
+      name: "Anthony Ty",
+      role: "Sound tech",
+      socials: {
+        instagram: "atypiano",
+        tikTok: "atypiano",
+      },
+    },
   ];
   return (
     <Router>
       <div className='App'>
-        <p>Welcome to reelz!</p>
-        <div>
-          <h2>Click the button below to join the callsheet!</h2>
-        </div>
-        <Link to='/setList'>
-          <button>Click to join callsheet</button>
-        </Link>
+        <HomeBar />
         <Routes>
+          {/* <Route path='/' element={<App />} /> */}
+          <Route path='/login' element={<LoginPage />} />
+          <Route path='/createaccount' element={<CreateAccountPage />} />
           <Route path='/setlist' element={<SetList castSheet={castList} />} />
         </Routes>
       </div>
