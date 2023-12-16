@@ -1,10 +1,111 @@
-import React from "react";
+import * as React from "react";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import { AccountCircleOutlined } from "@mui/icons-material";
+import TextField from "@mui/material/TextField";
+// import FormControlLabel from "@mui/material/FormControlLabel";
+// import Checkbox from "@mui/material/Checkbox";
+import { Link, redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const CreateAccountPage = (props) => {
+  const navigate = useNavigate();
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    console.log({
+      email: data.get("email"),
+      password: data.get("password"),
+      firstName: data.get("firstName"),
+      lastName: data.get("lastName"),
+    });
+    navigate("/setList");
+  };
   return (
-    <div>
-      <p>Create an Account</p>
-    </div>
+    <Container compoonent='main' maxWidth='xs'>
+      <CssBaseline />
+      <Box
+        sx={{
+          marginTop: 8,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+          <AccountCircleOutlined />
+        </Avatar>
+        <Typography component='h1' variant='h5'>
+          Sign Up
+        </Typography>
+        <Box component='form' noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                autoComplete='given-name'
+                name='firstName'
+                required
+                fullWidth
+                id='firstName'
+                label='First Name'
+                autoFocus
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                autoComplete='family-name'
+                name='lastName'
+                required
+                fullWidth
+                id='firstName'
+                label='Last Name'
+                autoFocus
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                autoComplete='email'
+                name='email'
+                required
+                fullWidth
+                id='email'
+                label='Email Address'
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                autoComplete='new-password'
+                name='password'
+                required
+                fullWidth
+                id='password'
+                label='Password'
+              />
+            </Grid>
+          </Grid>
+          {/* //! adding link to button will redirect to page before handling submission */}
+          <Button
+            type='submit'
+            fullWidth
+            variant='contained'
+            sx={{ mt: 3, mb: 2 }}
+          >
+            Sign Up
+          </Button>
+          <Grid container justifyContent='flex-end'>
+            <Grid item>
+              <Link to='/login'>Already have an account? Sign in</Link>
+            </Grid>
+          </Grid>
+        </Box>
+      </Box>
+    </Container>
   );
 };
 
